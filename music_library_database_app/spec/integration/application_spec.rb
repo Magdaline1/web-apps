@@ -54,4 +54,16 @@ describe Application do
         expect(response.body).to eq ("Pixies, ABBA, Taylor Swift, Nina Simone")
     end
   end
+
+  context "POST /artists" do
+    it 'adds artists to the database' do
+      post_response = post('/artists', name: 'Wild nothing', genre: 'Indie')
+      expect(post_response.status).to be (200)
+
+      get_response = get('/artists')
+
+      expect(get_response.status).to be(200)
+      expect(get_response.body).to eq ("Pixies, ABBA, Taylor Swift, Nina Simone, Wild nothing")
+    end
+  end
 end
