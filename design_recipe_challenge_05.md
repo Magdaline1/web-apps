@@ -66,13 +66,10 @@ describe Application do
   let(:app) { Application.new }
 
   context "POST /albums" do
-    it 'returns "Doolittle, Surfer Rosa"' do
-        response = post('/albums')
+    it 'returns nothing' do
+      response = post('/albums', title: "Voyage", release_year: 2022, artist_id: 2)
 
-        expect(response.status).to be(200)
-        expect(response.body).to eq ("Doolittle, Surfer Rosa, Waterloo,
-        Super Trouper, Bossanova, Lover, Folklore, I Put a Spell on You, Baltimore, Here Comes the Sun,
-        Fodder on My Wings, Ring Ring")
+      expect(response.status).to be(200)
     end
   end
 end
