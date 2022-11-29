@@ -8,9 +8,16 @@ def reset_albums_table
   connection.exec(seed_sql)
 end
 
+def reset_artists_table
+  seed_sql = File.read('spec/seeds/artists_seeds.sql')
+  connection = PG.connect({ host: '127.0.0.1', dbname: 'music_library_test' })
+  connection.exec(seed_sql)
+end
+
 describe Application do
   before(:each) do 
     reset_albums_table
+    reset_artists_table
   end
 
   # This is so we can use rack-test helper methods.
@@ -36,6 +43,15 @@ describe Application do
 
       get_response = get('/albums')
       expect(get_response.body).to eq "Doolittle, Surfer Rosa, Waterloo, Super Trouper, Bossanova, Lover, Folklore, I Put a Spell on You, Baltimore, Here Comes the Sun, Fodder on My Wings, Ring Ring, Voyage"
+    end
+  end
+
+  context "GET /artists" do
+    it 'returns a list of all artists' do
+        response = get('/artists')
+
+        # expect(response.status).to be(200)
+        expect(response.body).to eq ("Pixies, ABBA, Taylor Swift, Nina Simone")
     end
   end
 end

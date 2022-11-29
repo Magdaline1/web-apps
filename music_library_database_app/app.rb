@@ -32,4 +32,14 @@ class Application < Sinatra::Base
     album.artist_id = params[:artist_id]
     album_repository.create(album)
   end
+
+  get "/artists" do
+    artist_repository = ArtistRepository.new
+    artists = artist_repository.all
+    artist_list = []
+    artists.each do |artist|
+      artist_list << artist.name
+    end
+    artist_list.join(", ")
+  end
 end
