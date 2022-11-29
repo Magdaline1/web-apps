@@ -24,4 +24,12 @@ class Application < Sinatra::Base
     album_list.join(", ")
   end
 
+  post '/albums' do
+    album_repository = AlbumRepository.new
+    album = Album.new
+    album.title = params[:title]
+    album.release_year = params[:release_year]
+    album.artist_id = params[:artist_id]
+    album_repository.create(album)
+  end
 end

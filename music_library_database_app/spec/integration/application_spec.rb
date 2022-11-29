@@ -26,7 +26,16 @@ describe Application do
 
       expect(response.status).to be(200)
       expect(response.body).to eq ("Doolittle, Surfer Rosa, Waterloo, Super Trouper, Bossanova, Lover, Folklore, I Put a Spell on You, Baltimore, Here Comes the Sun, Fodder on My Wings, Ring Ring")
-      
+    end
+  end
+
+  context "POST /albums" do
+    it 'returns nothing' do
+      post_response = post('/albums', title: "Voyage", release_year: 2022, artist_id: 2)
+      expect(post_response.status).to be(200)
+
+      get_response = get('/albums')
+      expect(get_response.body).to eq "Doolittle, Surfer Rosa, Waterloo, Super Trouper, Bossanova, Lover, Folklore, I Put a Spell on You, Baltimore, Here Comes the Sun, Fodder on My Wings, Ring Ring, Voyage"
     end
   end
 end
