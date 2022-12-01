@@ -48,10 +48,10 @@ describe Application do
 
   context "GET /artists" do
     it 'returns a list of all artists' do
-        response = get('/artists')
+      response = get('/artists')
 
-        expect(response.status).to be(200)
-        expect(response.body).to eq ("Pixies, ABBA, Taylor Swift, Nina Simone")
+      expect(response.status).to be(200)
+      expect(response.body).to eq ("Pixies, ABBA, Taylor Swift, Nina Simone")
     end
   end
 
@@ -66,4 +66,16 @@ describe Application do
       expect(get_response.body).to eq ("Pixies, ABBA, Taylor Swift, Nina Simone, Wild nothing")
     end
   end
+
+  context "GET /albums/:id" do
+    it 'returns info about the relevant album' do
+      response = get('/albums/1')
+
+      expect(response.status).to be(200)
+      expect(response.body).to include('<h1>Doolittle</h1>')
+      expect(response.body).to include('Release year: 1989')
+      expect(response.body).to include('Artist: Pixies')
+    end
+  end
+  
 end
