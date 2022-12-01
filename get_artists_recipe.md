@@ -10,10 +10,15 @@ You'll need to include:
   * any query parameters (passed in the URL)
   * or body parameters (passed in the request body)
 
-Return a hello method
+Return a artist method
   Method: GET
   Path: /artists
   Query parameters: N/A
+
+  Method: Post
+  Path: /artists
+  Query parameter: N/A
+  Body parameters: Name, Genre
 
 ## 2. Design the Response
 
@@ -26,8 +31,10 @@ Your response might return plain text, JSON, or HTML code.
 _Replace the below with your own design. Think of all the different possible responses your route will return._
 
 ```
-Returns a list of artists names 
+Returns a list of artists names (GET)
 => Pixies, ABBA, Taylor Swift, Nina Simone
+
+Returns nothing (POST)
 
 ```
 
@@ -42,6 +49,15 @@ GET /artists
 
 # Expected response:
 Pixies, ABBA, Taylor Swift, Nina Simone
+
+POST /artists
+
+# Expected response:
+N/A
+
+Body:
+name=Wild nothing
+genre=Indie
 
 ```
 
@@ -65,6 +81,18 @@ describe Application do
 
         expect(response.status).to be(200)
         expect(response.body).to eq ("Pixies, ABBA, Taylor Swift, Nina Simone")
+    end
+  end
+
+  context "POST /artists" do
+    it 'adds artists to the database' do
+      post_response = post('/artists', name: 'Wild nothing', genre: 'Indie')
+      expect(post_response.status).to be (200)
+
+      get_response = get('/artists')
+
+      expect(response.status).to be(200)
+      expect(response.body).to eq ("Pixies, ABBA, Taylor Swift, Nina Simone, Wild Nothing")
     end
   end
 end

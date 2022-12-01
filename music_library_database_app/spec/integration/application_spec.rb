@@ -50,7 +50,7 @@ describe Application do
     it 'returns a list of all artists' do
         response = get('/artists')
 
-        # expect(response.status).to be(200)
+        expect(response.status).to be(200)
         expect(response.body).to eq ("Pixies, ABBA, Taylor Swift, Nina Simone")
     end
   end
