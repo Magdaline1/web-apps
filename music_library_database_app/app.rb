@@ -16,12 +16,12 @@ class Application < Sinatra::Base
 
   get '/albums' do
     album_repository = AlbumRepository.new
-    albums = album_repository.all
+    @albums = album_repository.all
     album_list = []
-    albums.each do |album|
+    @albums.each do |album|
       album_list << album.title
     end
-    album_list.join(", ")
+    return erb(:albums)
   end
 
   post '/albums' do

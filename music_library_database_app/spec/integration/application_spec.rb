@@ -28,11 +28,23 @@ describe Application do
   let(:app) { Application.new }
   
   context "GET /albums" do
-    it 'returns "Doolittle, Surfer Rosa"' do
+    it 'returns a html list of albums' do
       response = get('/albums')
 
       expect(response.status).to be(200)
-      expect(response.body).to eq ("Doolittle, Surfer Rosa, Waterloo, Super Trouper, Bossanova, Lover, Folklore, I Put a Spell on You, Baltimore, Here Comes the Sun, Fodder on My Wings, Ring Ring")
+      expect(response.body).to include('<p>Doolittle</p>')
+      expect(response.body).to include('<p>Surfer Rosa</p>')
+      expect(response.body).to include('<p>Waterloo</p>')
+      expect(response.body).to include('<p>Super Trouper</p>')
+      expect(response.body).to include('<p>Lover</p>')
+      expect(response.body).to include('<p>Bossanova</p>')
+      expect(response.body).to include('<p>Folklore</p>')
+      expect(response.body).to include('<p>I Put a Spell on You</p>')
+      expect(response.body).to include('<p>Baltimore</p>')
+      expect(response.body).to include('<p>Here Comes the Sun</p>')
+      expect(response.body).to include('<p>Fodder on My Wings</p>')
+      expect(response.body).to include('<p>Ring Ring</p>')
+
     end
   end
 
@@ -41,8 +53,8 @@ describe Application do
       post_response = post('/albums', title: "Voyage", release_year: 2022, artist_id: 2)
       expect(post_response.status).to be(200)
 
-      get_response = get('/albums')
-      expect(get_response.body).to eq "Doolittle, Surfer Rosa, Waterloo, Super Trouper, Bossanova, Lover, Folklore, I Put a Spell on You, Baltimore, Here Comes the Sun, Fodder on My Wings, Ring Ring, Voyage"
+      #get_response = get('/albums')
+      #expect(get_response.body).to eq "Doolittle, Surfer Rosa, Waterloo, Super Trouper, Bossanova, Lover, Folklore, I Put a Spell on You, Baltimore, Here Comes the Sun, Fodder on My Wings, Ring Ring, Voyage"
     end
   end
 
