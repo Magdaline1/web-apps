@@ -31,20 +31,10 @@ describe Application do
     it 'returns a html list of albums' do
       response = get('/albums')
 
-      expect(response.status).to be(200)
-      expect(response.body).to include('<p>Doolittle</p>')
-      expect(response.body).to include('<p>Surfer Rosa</p>')
-      expect(response.body).to include('<p>Waterloo</p>')
-      expect(response.body).to include('<p>Super Trouper</p>')
-      expect(response.body).to include('<p>Lover</p>')
-      expect(response.body).to include('<p>Bossanova</p>')
-      expect(response.body).to include('<p>Folklore</p>')
-      expect(response.body).to include('<p>I Put a Spell on You</p>')
-      expect(response.body).to include('<p>Baltimore</p>')
-      expect(response.body).to include('<p>Here Comes the Sun</p>')
-      expect(response.body).to include('<p>Fodder on My Wings</p>')
-      expect(response.body).to include('<p>Ring Ring</p>')
-
+      expect(response.body).to include('<a href="/albums/ 4">Super Trouper</a>')
+      expect(response.body).to include('<a href="/albums/ 5">Bossanova</a>')
+      expect(response.body).to include('<a href="/albums/ 6">Lover</a>')
+      expect(response.body).to include('<a href="/albums/ 7">Folklore</a>')
     end
   end
 
